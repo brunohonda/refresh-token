@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -16,6 +16,10 @@ export class UserService {
   }
 
   login(data: any) {
-    return this.http.post('http://localhost:3000/users/login', data);
+    return this.http
+      .post<{ token: string; }>('http://localhost:3000/users/login', data)
+      .pipe(
+        tap(({ token }) => localStorage.setItem('token', token)),
+      );
   }
 }
