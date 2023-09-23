@@ -1,0 +1,19 @@
+<div class="login">
+  <form [formGroup]="form" (ngSubmit)="login()" novalidate>
+    <h1>Cadastro de Usuário</h1>
+    <mat-form-field>
+      <mat-label>Login</mat-label>
+      <input matInput placeholder="Login" formControlName="username" required>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Senha</mat-label>
+      <input matInput type="password" placeholder="Senha" formControlName="password" required>
+    </mat-form-field>
+    <button
+      mat-raised-button
+      color="primary"
+      type="submit"
+      [disabled]="form.invalid || loginPending"
+    >Login</button>
+  </form>
+</div>
