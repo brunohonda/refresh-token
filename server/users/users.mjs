@@ -1,9 +1,11 @@
-const routes = require('express').Router();
-const jwt = require('jsonwebtoken');
+import { Router } from 'express';
+import jwt from 'jsonwebtoken';
 
 const users = [];
 
 const jwtSecret = 'banana';
+
+const routes = Router();
 
 routes.route('/users')
   .post((req, res) => {
@@ -67,4 +69,4 @@ routes.post('/refresh-token', (req, res) => {
   }
 });
 
-module.exports = routes;
+export default routes;
