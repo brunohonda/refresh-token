@@ -54,6 +54,6 @@ export class AuthInterceptor implements HttpInterceptor {
     localStorage.removeItem('token');
     localStorage.removeItem('refresh-token');
     this.router.navigate(['/login']);
-    return next.handle(request);
+    return throwError(() => new Error('Forbidden'));
   }
 }
