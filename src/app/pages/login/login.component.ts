@@ -40,7 +40,7 @@ export class LoginComponent {
           alert('User logged successfully!');
           this.router.navigate(['/']);
         },
-        error: ((err: any) => alert(err.error.message)),
+        error: ((err: any) => console.error(err)),
       });
   }
 }
