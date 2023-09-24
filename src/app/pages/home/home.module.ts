@@ -1,8 +1,10 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HomeComponent } from './home.component';
+import { NgModule } from '@angular/core';
+import { MatButtonModule } from '@angular/material/button';
+import { MatTableModule } from '@angular/material/table';
 import { RouterModule } from '@angular/router';
-import { MatListModule } from '@angular/material/list'
+
+import { HomeComponent } from './home.component';
 
 
 
@@ -15,7 +17,8 @@ import { MatListModule } from '@angular/material/list'
     RouterModule.forChild([
       { path: '', component: HomeComponent },
     ]),
-    MatListModule,
+    MatButtonModule,
+    MatTableModule,
   ]
 })
 export class HomeModule { }
