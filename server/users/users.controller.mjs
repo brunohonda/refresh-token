@@ -10,6 +10,9 @@ const UsersController = {
     } catch (err) {
       return res.status(400).json({ message: err.message });
     }
+  },
+  async getList(req, res) {
+    return res.json(await UsersService.getList());
   }
 };
 

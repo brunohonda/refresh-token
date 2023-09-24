@@ -11,6 +11,9 @@ const UsersService = {
     client.data.users.push({ username, password });
     return client.write();
   },
+  getList: async () => {
+    return client.data.users.map(user => ({ username: user.username }));
+  }
 };
 
 export default UsersService;
