@@ -4,6 +4,8 @@ html, body { height: 100%; }
 body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
+  background-color: var(--mdc-filled-text-field-container-color);
+  color: var(--mdc-filled-text-field-label-text-color);
 }
 
 .pointer {
