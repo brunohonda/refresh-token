@@ -13,6 +13,9 @@ const UsersService = {
   },
   getList: async () => {
     return client.data.users.map(user => ({ username: user.username }));
+  },
+  getByUsername: (username) => {
+    return client.data.users.find(user => user.username === username);
   }
 };
 
