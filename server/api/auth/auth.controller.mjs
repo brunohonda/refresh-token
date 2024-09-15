@@ -13,10 +13,20 @@ const AuthController = {
     const token = AuthService.generateToken(user);
     const refreshToken = AuthService.generateRefreshToken(user);
 
-    return res.status(200).json({ token, refreshToken });
+    return res.status(200)
+      .cookie(
+        'refreshToken',
+        refreshToken,
+        {
+          secure: false,
+          httpOnly: true,
+          maxAge: 60000,
+        }
+      )
+      .json({ token });
   },
   async refreshToken(req, res) {
-    const { refreshToken } = req.body;
+    const { refreshToken } = req.cookies;
 
     try {
       AuthService.verifyToken(refreshToken ?? '');

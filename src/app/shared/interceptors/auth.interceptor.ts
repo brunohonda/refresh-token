@@ -2,8 +2,8 @@ import { HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest
 import { Injectable } from '@angular/core';
 import { catchError, Observable, switchMap, throwError } from 'rxjs';
 
-import { UserService } from '../services/user.service';
 import { Router } from '@angular/router';
+import { UserService } from '../services/user.service';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
@@ -15,9 +15,10 @@ export class AuthInterceptor implements HttpInterceptor {
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     const token = localStorage.getItem('token') ?? '';
-    const requestClone = request.clone({
+    let requestClone = request.clone({
+      withCredentials: true,
       setHeaders: {
-        Authorization: `Bearer ${token}`
+        Authorization: `Bearer ${token}`,
       }
     });
 
@@ -54,6 +55,7 @@ export class AuthInterceptor implements HttpInterceptor {
     localStorage.removeItem('token');
     localStorage.removeItem('refresh-token');
     this.router.navigate(['/login']);
+    alert('Your session is expired!');
     return throwError(() => new Error('Forbidden'));
   }
 }

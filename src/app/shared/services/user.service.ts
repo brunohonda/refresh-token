@@ -15,22 +15,19 @@ export class UserService {
     return this.http.post('http://localhost:3000/users', data);
   }
 
-  login(data: any): Observable<{ token: string; refreshToken: string; }> {
+  login(data: any): Observable<{ token: string; }> {
     return this.http
-      .post<{ token: string; refreshToken: string; }>('http://localhost:3000/login', data)
+      .post<{ token: string; }>('http://localhost:3000/login', data)
       .pipe(
-        tap(({ token, refreshToken }) => {
+        tap(({ token }) => {
           localStorage.setItem('token', token);
-          localStorage.setItem('refresh-token', refreshToken);
         }),
       );
   }
 
   refreshToken(): Observable<{ token: string; }> {
     return this.http
-      .post<{ token: string; }>('http://localhost:3000/refresh-token', {
-        refreshToken: localStorage.getItem('refresh-token'),
-      })
+      .post<{ token: string; }>('http://localhost:3000/refresh-token', {})
       .pipe(
         tap(({ token }) => localStorage.setItem('token', token)),
       );
